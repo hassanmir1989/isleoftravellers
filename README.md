@@ -1,2 +1,0 @@
-# isleoftraveller
-Created with CodeSandbox
