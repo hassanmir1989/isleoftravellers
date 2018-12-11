@@ -3,6 +3,7 @@ import Adventure from "../Pages/Adventures";
 import Blog from "../Pages/Blog";
 import ContactUs from "../Pages/ContactUs";
 import PageNotFound from "../Pages/PageNotFound";
+import AdminPage from "../Pages/AdminPage";
 import {
   BrowserRouter,
   Route,
@@ -17,6 +18,7 @@ const AppRouter = () => (
         path="/adventures"
         component={Adventure}
       />
+      <Route path="/admin" component={AdminPage} />
       <Route exact path="/blog" component={Blog} />
       <Route
         exact
