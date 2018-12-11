@@ -9,6 +9,32 @@ import {
 } from "reactstrap";
 
 class BlogUpdate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onFormSubmit = this.onFormSubmit.bind(
+      this
+    );
+    this.state = {
+      blogname: null,
+      blogdescription: null,
+      bloglocation: null,
+      blogimage: null
+    };
+  }
+
+  onFormSubmit(e) {
+    e.preventDefault();
+    const blogname = e.target.blogname.value;
+    const blogdescription =
+      e.target.blogdescription.value;
+    const bloglocation =
+      e.target.bloglocation.value;
+    this.setState(() => ({
+      blogname,
+      blogdescription,
+      bloglocation
+    }));
+  }
   render() {
     return (
       <div className="mt-3 container">
@@ -16,15 +42,15 @@ class BlogUpdate extends React.Component {
           <h1 className="display-3 text-center">
             Blog Update
           </h1>
-          <Form>
+          <Form onSubmit={this.onFormSubmit}>
             <FormGroup>
               <Label for="exampleEmail">
                 Blog Name
               </Label>
               <Input
                 type="text"
-                name="blogName"
-                id="blogName"
+                name="blogname"
+                id="blogname"
                 placeholder="Enter Blog's Name"
               />
             </FormGroup>
