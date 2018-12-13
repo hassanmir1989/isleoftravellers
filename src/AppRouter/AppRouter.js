@@ -13,11 +13,7 @@ import {
 const AppRouter = () => (
   <BrowserRouter>
     <Switch>
-      <Route
-        exact
-        path="/adventures"
-        component={Adventure}
-      />
+      <Route exact path="/" component={Adventure} />
       <Route path="/admin" component={AdminPage} />
       <Route exact path="/blog" component={Blog} />
       <Route

@@ -15,24 +15,24 @@ class BlogUpdate extends React.Component {
       this
     );
     this.state = {
-      blogname: null,
-      blogdescription: null,
-      bloglocation: null,
-      blogimage: null
+      blogName: null,
+      blogDescription: null,
+      blogLocation: null,
+      blogImage: null
     };
   }
 
   onFormSubmit(e) {
     e.preventDefault();
-    const blogname = e.target.blogname.value;
-    const blogdescription =
-      e.target.blogdescription.value;
-    const bloglocation =
-      e.target.bloglocation.value;
+    const blogName = e.target.blogName.value;
+    const blogDescription =
+      e.target.blogDescription.value;
+    const blogLocation =
+      e.target.blogLocation.value;
     this.setState(() => ({
-      blogname,
-      blogdescription,
-      bloglocation
+      blogName,
+      blogDescription,
+      blogLocation
     }));
   }
   render() {
@@ -60,8 +60,8 @@ class BlogUpdate extends React.Component {
               </Label>
               <Input
                 type="textarea"
-                name="blogdescription"
-                id="blogdescription"
+                name="blogDescription"
+                id="blogDescription"
                 placeholder="Enter Blog Description"
               />
             </FormGroup>
@@ -71,8 +71,8 @@ class BlogUpdate extends React.Component {
               </Label>
               <Input
                 type="text"
-                name="bloglocation"
-                id="bloglocation"
+                name="blogLocation"
+                id="blogLocation"
                 placeholder="Enter Location"
               />
             </FormGroup>

@@ -1,4 +1,8 @@
-import { createStore, combineReducers } from "redux";
+import {
+  createStore,
+  combineReducers
+} from "redux";
+import { addBlog } from "../Actions/blogActions";
 
 const blogReducer = (state = [], action) => {
   switch (action.type) {
@@ -9,23 +13,28 @@ const blogReducer = (state = [], action) => {
   }
 };
 
-const store = createStore(combineReducers({ blogReducer }));
+const store = createStore(
+  combineReducers({ blogReducer })
+);
 
-const addBlog = ({
-  blogName = "",
-  blogDescription = "",
-  blogLocation = "",
-  blogImage = ""
-} = {}) => ({
-  type: "ADD_BLOG",
-  blog: {
-    blogName,
-    blogDescription,
-    blogLocation,
-    blogImage
-  }
-});
+const testBlogOne = {
+  blogName: "test1",
+  blogDescription: "test1",
+  blogLocation: "test1",
+  blogImage: "test1"
+};
+const testBlogTwo = {
+  blogName: "test2",
+  blogDescription: "test2",
+  blogLocation: "test2",
+  blogImage: "test2"
+};
 
-store.dispatch(addBlog({ blogName: "hassan" }));
-store.dispatch(addBlog());
+const testBlogOneAction = store.dispatch(
+  addBlog(testBlogOne)
+);
+const testBlogTwoAction = store.dispatch(
+  addBlog(testBlogTwo)
+);
+
 console.log(store.getState());
