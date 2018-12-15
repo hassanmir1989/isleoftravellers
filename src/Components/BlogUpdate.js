@@ -1,19 +1,10 @@
 import React from "react";
-import {
-  Jumbotron,
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+import { Jumbotron, Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 class BlogUpdate extends React.Component {
   constructor(props) {
     super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(
-      this
-    );
+    this.onFormSubmit = this.onFormSubmit.bind(this);
     this.state = {
       blogName: null,
       blogDescription: null,
@@ -25,10 +16,8 @@ class BlogUpdate extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const blogName = e.target.blogName.value;
-    const blogDescription =
-      e.target.blogDescription.value;
-    const blogLocation =
-      e.target.blogLocation.value;
+    const blogDescription = e.target.blogDescription.value;
+    const blogLocation = e.target.blogLocation.value;
     this.setState(() => ({
       blogName,
       blogDescription,
@@ -39,14 +28,10 @@ class BlogUpdate extends React.Component {
     return (
       <div className="mt-3 container">
         <Jumbotron>
-          <h1 className="display-3 text-center">
-            Blog Update
-          </h1>
+          <h1 className="display-3 text-center">Blog Update</h1>
           <Form onSubmit={this.onFormSubmit}>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog Name
-              </Label>
+              <Label for="exampleEmail">Blog Name</Label>
               <Input
                 type="text"
                 name="blogname"
@@ -55,9 +40,7 @@ class BlogUpdate extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog Description
-              </Label>
+              <Label for="exampleEmail">Blog Description</Label>
               <Input
                 type="textarea"
                 name="blogDescription"
@@ -66,9 +49,7 @@ class BlogUpdate extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog's Location
-              </Label>
+              <Label for="exampleEmail">Blog's Location</Label>
               <Input
                 type="text"
                 name="blogLocation"

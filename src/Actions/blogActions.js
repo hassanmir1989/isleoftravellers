@@ -16,4 +16,14 @@ const addBlog = ({
   }
 });
 
-export { addBlog };
+const editBlog = (id, blog) => ({
+  type: "EDIT_BLOG",
+  id,
+  blog
+});
+
+const removeBlog = id => ({
+  type: "REMOVE_BLOG",
+  id
+});
+export { addBlog, editBlog, removeBlog };
