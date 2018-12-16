@@ -4,6 +4,7 @@ import Blog from "../Pages/Blog";
 import ContactUs from "../Pages/ContactUs";
 import PageNotFound from "../Pages/PageNotFound";
 import AdminPage from "../Pages/AdminPage";
+import EditBlog from "../Pages/EditBlog";
 import {
   BrowserRouter,
   Route,
@@ -16,6 +17,10 @@ const AppRouter = () => (
       <Route exact path="/" component={Adventure} />
       <Route path="/admin" component={AdminPage} />
       <Route exact path="/blog" component={Blog} />
+      <Route
+        path="/editblog"
+        component={EditBlog}
+      />
       <Route
         exact
         path="/contactus"

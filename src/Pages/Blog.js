@@ -1,15 +1,28 @@
 import React from "react";
 import Header from "../Components/Header";
+import { connect } from "react-redux";
+import BlogCard from "../Components/BlogCards";
 
 class Blog extends React.Component {
   render() {
     return (
       <div>
         <Header />
-        <p>This is the Blog page</p>
+        <div className="container mt-3">
+          <div class="row">
+            {this.props.blogs.map(blog => (
+              <div className="col-xs-6 col-sm-6 col-md-4 mb-2">
+                <BlogCard {...blog} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default Blog;
+const mapStateToProps = state => ({
+  blogs: state.blogReducer
+});
+export default connect(mapStateToProps)(Blog);

@@ -14,7 +14,7 @@ class AdminPage extends React.Component {
 
   onFormSubmit(data) {
     this.props.dispatch(addBlog(data));
-    this.props.history.push("/");
+    this.props.history.push("/blog");
   }
 
   render() {
@@ -26,7 +26,6 @@ class AdminPage extends React.Component {
             this.onFormSubmit(blogDetails);
           }}
         />
-        {console.log(this.props)}
       </div>
     );
   }
