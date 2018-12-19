@@ -6,7 +6,9 @@ class Adventures extends React.Component {
     return (
       <div>
         <Header />
-        <MainPageCarousel />
+        <div className="mx-auto col-md-10 col-sm-12">
+          <MainPageCarousel className="text-center" />
+        </div>
       </div>
     );
   }

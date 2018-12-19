@@ -26,49 +26,32 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        <Navbar
-          className="header"
-          color="light"
-          light
-          expand="md">
+        <Navbar className="header" color="light" light expand="md">
           <div className="container">
-            <NavbarBrand
-              className="font-italic"
-              to="/">
-              <i className="fas fa-globe-asia" />{" "}
-              Isle of Traveller's{" "}
+            <NavbarBrand className="font-italic" to="/">
+              <i className="fas fa-globe-asia" /> Isle of Travellers{" "}
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
 
-            <Collapse
-              isOpen={this.state.isOpen}
-              navbar>
+            <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem className="navitem">
-                  <NavLink
-                    className="headerLink"
-                    to="/">
+                  <NavLink className="headerLink" to="/">
                     Adventures
                   </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                  <NavLink
-                    className="headerLink"
-                    to="/blog">
+                  <NavLink className="headerLink" to="/blog">
                     Blog
                   </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                  <NavLink
-                    className="headerLink"
-                    to="/contactus">
+                  <NavLink className="headerLink" to="/contactus">
                     Contact Us
                   </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                  <NavLink
-                    className="headerLink"
-                    to="/admin">
+                  <NavLink className="headerLink" to="/admin">
                     Admin
                   </NavLink>
                 </NavItem>

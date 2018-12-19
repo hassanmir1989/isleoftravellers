@@ -25,9 +25,6 @@ const items = [
 ];
 
 const MainPageCarousel = () => (
-  <UncontrolledCarousel
-    className="my-4 mx-2"
-    items={items}
-  />
+  <UncontrolledCarousel className="my-4 mx-2" items={items} />
 );
 export default MainPageCarousel;

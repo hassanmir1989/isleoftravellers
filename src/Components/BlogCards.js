@@ -15,14 +15,16 @@ const BlogCard = props => {
     <Card>
       <CardBody>
         <CardTitle>{props.blogName}</CardTitle>
-        <CardSubtitle>
-          {props.blogLocation}
-        </CardSubtitle>
+        <CardSubtitle>{props.blogLocation}</CardSubtitle>
         <CardText>{props.blogDescription}</CardText>
-        <Button outline color="success">
-          <NavLink to="/editblog">
-            View More
-          </NavLink>
+        <Button
+          onClick={() => {
+            props.onClickViewBlog();
+          }}
+          outline
+          color="success"
+        >
+          View More
         </Button>{" "}
       </CardBody>
     </Card>

@@ -12,23 +12,16 @@ import {
 class BlogUpdate extends React.Component {
   constructor(props) {
     super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(
-      this
-    );
-    this.onChangeBlogName = this.onChangeBlogName.bind(
-      this
-    );
-    this.onChangeBlogDescription = this.onChangeBlogDescription.bind(
-      this
-    );
-    this.onChangeBlogLocation = this.onChangeBlogLocation.bind(
-      this
-    );
+
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onChangeBlogName = this.onChangeBlogName.bind(this);
+    this.onChangeBlogDescription = this.onChangeBlogDescription.bind(this);
+    this.onChangeBlogLocation = this.onChangeBlogLocation.bind(this);
     this.state = {
-      blogName: "",
-      blogDescription: "",
-      blogLocation: "",
-      blogImage: "",
+      blogName: props.blogName ? props.blogName : "",
+      blogDescription: props.blogDescription ? props.blogDescription : "",
+      blogLocation: props.blogLocation ? props.blogLocation : "",
+      blogImage: props.blogImage ? props.blogLocation : "",
       error: ""
     };
   }
@@ -36,23 +29,17 @@ class BlogUpdate extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const blogName = this.state.blogName;
-    const blogDescription = this.state
-      .blogDescription;
+    const blogDescription = this.state.blogDescription;
     const blogLocation = this.state.blogLocation;
 
-    if (
-      blogName &&
-      blogDescription &&
-      blogLocation
-    ) {
+    if (blogName && blogDescription && blogLocation) {
       this.props.onSubmitBlogUpdate(this.state);
       this.setState(() => ({
         error: ""
       }));
     } else {
       this.setState(() => ({
-        error:
-          "Please enter all details to upload blog"
+        error: "Please enter all details to upload blog"
       }));
     }
   }
@@ -79,20 +66,12 @@ class BlogUpdate extends React.Component {
   render() {
     return (
       <div className="mt-3 container">
-        {this.state.error && (
-          <Alert color="danger">
-            {this.state.error}
-          </Alert>
-        )}
+        {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
         <Jumbotron>
-          <h1 className="display-3 text-center">
-            Blog Update
-          </h1>
+          <h1 className="display-3 text-center">Blog Update</h1>
           <Form onSubmit={this.onFormSubmit}>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog Name
-              </Label>
+              <Label for="exampleEmail">Blog Name</Label>
               <Input
                 type="text"
                 name="blogname"
@@ -103,24 +82,18 @@ class BlogUpdate extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog Description
-              </Label>
+              <Label for="exampleEmail">Blog Description</Label>
               <Input
                 type="textarea"
                 name="blogDescription"
                 id="blogDescription"
                 placeholder="Enter Blog Description"
                 value={this.state.blogDescription}
-                onChange={
-                  this.onChangeBlogDescription
-                }
+                onChange={this.onChangeBlogDescription}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">
-                Blog's Location
-              </Label>
+              <Label for="exampleEmail">Blog's Location</Label>
               <Input
                 type="text"
                 name="blogLocation"

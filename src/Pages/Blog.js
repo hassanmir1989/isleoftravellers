@@ -9,10 +9,15 @@ class Blog extends React.Component {
       <div>
         <Header />
         <div className="container mt-3">
-          <div class="row">
+          <div className="row">
             {this.props.blogs.map(blog => (
               <div className="col-xs-6 col-sm-6 col-md-4 mb-2">
-                <BlogCard {...blog} />
+                <BlogCard
+                  onClickViewBlog={() => {
+                    this.props.history.push(`/editblog/${blog.blogID}`);
+                  }}
+                  {...blog}
+                />
               </div>
             ))}
           </div>
