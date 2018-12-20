@@ -9,26 +9,38 @@ import {
   Button
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { removeBlog } from "../Actions/blogActions";
 
 const BlogCard = props => {
   return (
     <Card>
       <CardBody>
         <CardTitle>{props.blogName}</CardTitle>
-        <CardSubtitle>{props.blogLocation}</CardSubtitle>
+        <CardSubtitle>
+          {props.blogLocation}
+        </CardSubtitle>
         <CardText>{props.blogDescription}</CardText>
         <Button
+          className="p-0"
           onClick={() => {
             props.onClickViewBlog();
           }}
-          outline
-          color="success"
-        >
+          color="link">
           View More
+        </Button>{" "}
+        <Button
+          onClick={() => {
+            props.dispatch(
+              removeBlog(props.blogID)
+            );
+          }}
+          color="danger">
+          Delete
         </Button>{" "}
       </CardBody>
     </Card>
   );
 };
 
-export default BlogCard;
+export default connect()(BlogCard);
