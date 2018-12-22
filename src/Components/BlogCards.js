@@ -17,25 +17,23 @@ const BlogCard = props => {
     <Card>
       <CardBody>
         <CardTitle>{props.blogName}</CardTitle>
-        <CardSubtitle>
-          {props.blogLocation}
-        </CardSubtitle>
+        <CardSubtitle>{props.blogLocation}</CardSubtitle>
         <CardText>{props.blogDescription}</CardText>
         <Button
           className="p-0"
           onClick={() => {
             props.onClickViewBlog();
           }}
-          color="link">
+          color="link"
+        >
           View More
         </Button>{" "}
         <Button
           onClick={() => {
-            props.dispatch(
-              startRemoveBlog(props.blogID)
-            );
+            props.dispatch(startRemoveBlog(props.blogID));
           }}
-          color="danger">
+          color="danger"
+        >
           Delete
         </Button>{" "}
       </CardBody>
