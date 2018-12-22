@@ -1,9 +1,15 @@
-import { createStore, combineReducers } from "redux";
-import { addBlog, editBlog, removeBlog } from "../Actions/blogActions";
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware
+} from "redux";
 import blogReducer from "../Reducers/blogReducer";
-
+import thunk from "redux-thunk";
 const configureStore = () => {
-  const store = createStore(combineReducers({ blogReducer }));
+  const store = createStore(
+    combineReducers({ blogReducer }),
+    applyMiddleware(thunk)
+  );
   return store;
 };
 

@@ -2,18 +2,16 @@ import React from "react";
 import Header from "../Components/Header";
 import BlogUpdate from "../Components/BlogUpdate";
 import { connect } from "react-redux";
-import { addBlog } from "../Actions/blogActions";
+import { startAddBlog } from "../Actions/blogActions";
 class AdminPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onFormSubmit = this.onFormSubmit.bind(
-      this
-    );
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onFormSubmit(data) {
-    this.props.dispatch(addBlog(data));
+    this.props.dispatch(startAddBlog(data));
     this.props.history.push("/blog");
   }
 

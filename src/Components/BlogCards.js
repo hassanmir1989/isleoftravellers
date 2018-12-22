@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeBlog } from "../Actions/blogActions";
+import { startRemoveBlog } from "../Actions/blogActions";
 
 const BlogCard = props => {
   return (
@@ -32,7 +32,7 @@ const BlogCard = props => {
         <Button
           onClick={() => {
             props.dispatch(
-              removeBlog(props.blogID)
+              startRemoveBlog(props.blogID)
             );
           }}
           color="danger">

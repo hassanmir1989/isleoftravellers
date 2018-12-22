@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Components/Header";
 import { connect } from "react-redux";
-import { editBlog } from "../Actions/blogActions";
+import { startEditBlog } from "../Actions/blogActions";
 import BlogUpdate from "../Components/BlogUpdate";
 class EditBlog extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class EditBlog extends React.Component {
   }
 
   onFormUpdate(blog) {
-    this.props.dispatch(editBlog(this.props.match.params.id, blog));
+    this.props.dispatch(startEditBlog(this.props.match.params.id, blog));
     this.props.history.push("/blog");
   }
   render() {
