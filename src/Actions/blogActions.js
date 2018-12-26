@@ -48,7 +48,7 @@ export const startEditBlog = (id, blog) => {
         ...blog
       })
       .then(ref => {
-        dispatch(editBlog(ref.key, blog));
+        dispatch(editBlog(id, blog));
       });
   };
 };

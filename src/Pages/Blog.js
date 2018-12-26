@@ -13,7 +13,6 @@ class Blog extends React.Component {
   }
 
   render() {
-    console.log(this.props.blogs);
     return (
       <div>
         <Header />
