@@ -6,8 +6,25 @@ import { Provider } from "react-redux";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addBlog } from "./Actions/blogActions";
-import "./firebase/firebase";
+import database from "./firebase/firebase";
 const store = configureStore();
+
+database
+  .ref("blogInfo")
+  .once("value")
+  .then(snapshot => {
+    const blog = [];
+
+    snapshot.forEach(childSnapshot => {
+      blog.push({
+        ...childSnapshot.val(),
+        blogID: childSnapshot.key
+      });
+    });
+    blog.map(singleBlog => {
+      store.dispatch(addBlog(singleBlog));
+    });
+  });
 
 const AppWithRedux = () => (
   <Provider store={store}>

@@ -1,5 +1,6 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
+
 const addBlog = ({
   blogID,
   blogName = "Not mentioned",
@@ -67,4 +68,5 @@ export const startRemoveBlog = id => {
       });
   };
 };
+
 export { addBlog, editBlog, removeBlog };
