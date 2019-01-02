@@ -6,11 +6,18 @@ import BlogUpdate from "../Components/BlogUpdate";
 class EditBlog extends React.Component {
   constructor(props) {
     super(props);
-    this.onFormUpdate = this.onFormUpdate.bind(this);
+    this.onFormUpdate = this.onFormUpdate.bind(
+      this
+    );
   }
 
   onFormUpdate(blog) {
-    this.props.dispatch(startEditBlog(this.props.match.params.id, blog));
+    this.props.dispatch(
+      startEditBlog(
+        this.props.match.params.id,
+        blog
+      )
+    );
     this.props.history.push("/blog");
   }
   render() {

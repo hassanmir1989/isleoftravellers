@@ -6,7 +6,8 @@ const addBlog = ({
   blogName = "Not mentioned",
   blogDescription = "Not mentioned",
   blogLocation = "Not mentioned",
-  blogImage = "Not mentioned"
+  blogImageURL = "Not mentioned",
+  blogImageFilename = "Not Mentioned"
 } = {}) => ({
   type: "ADD_BLOG",
   blog: {
@@ -14,7 +15,8 @@ const addBlog = ({
     blogName,
     blogDescription,
     blogLocation,
-    blogImage
+    blogImageURL,
+    blogImageFilename
   }
 });
 
@@ -44,7 +46,7 @@ export const startEditBlog = (id, blog) => {
   return dispatch => {
     database
       .ref(`blogInfo/${id}`)
-      .set({
+      .update({
         ...blog
       })
       .then(ref => {

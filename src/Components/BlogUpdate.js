@@ -8,6 +8,8 @@ import {
   Label,
   Alert
 } from "reactstrap";
+import FileUploader from "react-firebase-file-uploader";
+import * as firebase from "firebase/app";
 
 class BlogUpdate extends React.Component {
   constructor(props) {
@@ -21,8 +23,10 @@ class BlogUpdate extends React.Component {
       blogName: props.blogName ? props.blogName : "",
       blogDescription: props.blogDescription ? props.blogDescription : "",
       blogLocation: props.blogLocation ? props.blogLocation : "",
-      blogImage: props.blogImage ? props.blogLocation : "",
-      error: ""
+      blogImageURL: props.blogImageURL ? props.blogImageURL : "",
+      blogImageFilename: props.blogImageFilename ? props.blogImageFilename : "",
+      error: "",
+      uploadButton: props.blogImageURL ? false : true
     };
   }
 
@@ -63,6 +67,21 @@ class BlogUpdate extends React.Component {
       blogLocation
     }));
   }
+
+  handleUploadSuccess = blogImageFilename => {
+    firebase
+      .storage()
+      .ref("blogImages")
+      .child(blogImageFilename)
+      .getDownloadURL()
+      .then(blogImageURL => {
+        this.setState(prevState => ({
+          blogImageURL,
+          blogImageFilename,
+          uploadButton: !prevState.uploadButton
+        }));
+      });
+  };
   render() {
     return (
       <div className="mt-3 container">
@@ -103,8 +122,16 @@ class BlogUpdate extends React.Component {
                 onChange={this.onChangeBlogLocation}
               />
             </FormGroup>
-
-            <Button color="primary">Add</Button>
+            <FileUploader
+              accept="images/*"
+              name="avatar"
+              randomizeFilename
+              storageRef={firebase.storage().ref("blogImages")}
+              onUploadSuccess={this.handleUploadSuccess}
+            />
+            <Button disabled={this.state.uploadButton} color="primary">
+              Add
+            </Button>
           </Form>
         </Jumbotron>
       </div>

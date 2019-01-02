@@ -7,9 +7,6 @@ import database from "../firebase/firebase";
 class Blog extends React.Component {
   constructor() {
     super();
-    this.state = {
-      blog: []
-    };
   }
 
   render() {
@@ -19,16 +16,12 @@ class Blog extends React.Component {
 
         <div className="container mt-3" />
 
-        <div className="row">
+        <div className="row p-0 m-0">
           {this.props.blogs.map(blog => (
-            <div
-              key={blog.blogID}
-              className="col-xs-6 col-sm-6 col-md-4 mb-2">
+            <div key={blog.blogID} className="col-xs-6 col-sm-4 col-md-2 mb-2">
               <BlogCard
                 onClickViewBlog={() => {
-                  this.props.history.push(
-                    `/editblog/${blog.blogID}`
-                  );
+                  this.props.history.push(`/editblog/${blog.blogID}`);
                 }}
                 {...blog}
               />
