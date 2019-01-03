@@ -13,6 +13,7 @@ const AppRouter = () => (
       <Route exact path="/" component={Adventure} />
       <Route path="/admin" component={AdminPage} />
       <Route exact path="/blog" component={Blog} />
+
       <Route path="/editblog/:id" component={EditBlog} />
       <Route exact path="/contactus" component={ContactUs} />
       <Route path="/playground" component={Playground} />

@@ -23,7 +23,9 @@ class BlogUpdate extends React.Component {
       blogName: props.blogName ? props.blogName : "",
       blogDescription: props.blogDescription ? props.blogDescription : "",
       blogLocation: props.blogLocation ? props.blogLocation : "",
-      blogImageURL: props.blogImageURL ? props.blogImageURL : "",
+      blogImageURL: props.blogImageURL
+        ? props.blogImageURL
+        : "No Image uploaded",
       blogImageFilename: props.blogImageFilename ? props.blogImageFilename : "",
       error: "",
       uploadButton: props.blogImageURL ? false : true
@@ -122,6 +124,11 @@ class BlogUpdate extends React.Component {
                 onChange={this.onChangeBlogLocation}
               />
             </FormGroup>
+            {<p>{this.props.blogImageURL}</p> && (
+              <img width="20%" src={this.props.blogImageURL} />
+            )}
+            <br />
+
             <FileUploader
               accept="images/*"
               name="avatar"

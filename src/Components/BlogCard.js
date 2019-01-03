@@ -8,28 +8,33 @@ import {
   CardText,
   Button
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { startRemoveBlog } from "../Actions/blogActions";
-
+import SingleBlog from "../Components/SingleBlog";
 const BlogCard = props => {
   return (
     <Card className="text-center">
       <CardBody>
-        <img width="30%" className="img-thumbnail" src={props.blogImageURL} />
+        <div className="img-thumbnail">
+          <img width="100%" src={props.blogImageURL} />
+        </div>
         <CardTitle>{props.blogName}</CardTitle>
         <CardSubtitle>{props.blogLocation}</CardSubtitle>
-        <CardText>{props.blogDescription}</CardText>
+        <CardText>{props.blogDescription.substr(0, 30)}...</CardText>
+        <SingleBlog {...props} buttonLabel="View More" />
         <Button
-          className="p-0"
+          className="mt-2"
+          size="sm"
           onClick={() => {
-            props.onClickViewBlog();
+            props.onClickEdit();
           }}
-          color="link"
+          color="warning"
         >
-          View More
+          Edit
         </Button>{" "}
         <Button
+          className="mt-2"
+          size="sm"
           onClick={() => {
             props.dispatch(startRemoveBlog(props.blogID));
           }}
