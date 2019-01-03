@@ -16,7 +16,7 @@ const BlogCard = props => {
     <Card className="text-center">
       <CardBody>
         <div className="img-thumbnail">
-          <img width="100%" src={props.blogImageURL} />
+          <img width="100%" alt="No image found" src={props.blogImageURL} />
         </div>
         <CardTitle>{props.blogName}</CardTitle>
         <CardSubtitle>{props.blogLocation}</CardSubtitle>
@@ -36,7 +36,9 @@ const BlogCard = props => {
           className="mt-2"
           size="sm"
           onClick={() => {
-            props.dispatch(startRemoveBlog(props.blogID));
+            props.dispatch(
+              startRemoveBlog(props.blogID, props.blogImageFilename)
+            );
           }}
           color="danger"
         >

@@ -6,7 +6,8 @@ import {
   FormGroup,
   Input,
   Label,
-  Alert
+  Alert,
+  Progress
 } from "reactstrap";
 import FileUploader from "react-firebase-file-uploader";
 import * as firebase from "firebase/app";
@@ -19,6 +20,7 @@ class BlogUpdate extends React.Component {
     this.onChangeBlogName = this.onChangeBlogName.bind(this);
     this.onChangeBlogDescription = this.onChangeBlogDescription.bind(this);
     this.onChangeBlogLocation = this.onChangeBlogLocation.bind(this);
+    this.handleProgress = this.handleProgress.bind(this);
     this.state = {
       blogName: props.blogName ? props.blogName : "",
       blogDescription: props.blogDescription ? props.blogDescription : "",
@@ -28,7 +30,8 @@ class BlogUpdate extends React.Component {
         : "No Image uploaded",
       blogImageFilename: props.blogImageFilename ? props.blogImageFilename : "",
       error: "",
-      uploadButton: props.blogImageURL ? false : true
+      uploadButton: props.blogImageURL ? false : true,
+      progress: 0
     };
   }
 
@@ -70,6 +73,10 @@ class BlogUpdate extends React.Component {
     }));
   }
 
+  handleProgress(progress) {
+    this.setState({ progress });
+  }
+
   handleUploadSuccess = blogImageFilename => {
     firebase
       .storage()
@@ -84,6 +91,7 @@ class BlogUpdate extends React.Component {
         }));
       });
   };
+
   render() {
     return (
       <div className="mt-3 container">
@@ -124,20 +132,45 @@ class BlogUpdate extends React.Component {
                 onChange={this.onChangeBlogLocation}
               />
             </FormGroup>
-            {<p>{this.props.blogImageURL}</p> && (
-              <img width="20%" src={this.props.blogImageURL} />
+            {!this.state.uploadButton ? (
+              <div className="text-center">
+                <img width="20%" src={this.state.blogImageURL} />
+                <br />
+              </div>
+            ) : (
+              <p>No Images Uploaded</p>
             )}
             <br />
-
+            <Progress style={{ color: "black" }} value={this.state.progress}>
+              {this.state.progress}%
+            </Progress>
+            <br />
             <FileUploader
               accept="images/*"
               name="avatar"
               randomizeFilename
               storageRef={firebase.storage().ref("blogImages")}
               onUploadSuccess={this.handleUploadSuccess}
+              onProgress={this.handleProgress}
             />
-            <Button disabled={this.state.uploadButton} color="primary">
-              Add
+            <br />
+            <Button
+              className="mt-3"
+              color={
+                this.state.blogLocation &&
+                this.state.blogName &&
+                !this.state.uploadButton &&
+                this.state.blogDescription &&
+                "success"
+              }
+              disabled={this.state.uploadButton}
+            >
+              {this.state.blogLocation &&
+              this.state.blogName &&
+              !this.state.uploadButton &&
+              this.state.blogDescription
+                ? "OKAY TO UPLOAD"
+                : "Please Complete everything to upload"}
             </Button>
           </Form>
         </Jumbotron>

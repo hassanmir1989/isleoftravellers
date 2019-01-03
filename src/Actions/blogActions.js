@@ -1,5 +1,6 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
+import firebase from "firebase";
 
 const addBlog = ({
   blogID,
@@ -60,12 +61,17 @@ const removeBlog = id => ({
   id
 });
 
-export const startRemoveBlog = id => {
+export const startRemoveBlog = (id, photoID) => {
   return dispatch => {
+    console.log(photoID);
     database
       .ref(`blogInfo/${id}`)
       .remove()
       .then(() => {
+        firebase
+          .storage()
+          .ref(`blogImages/${photoID}`)
+          .delete();
         dispatch(removeBlog(id));
       });
   };
