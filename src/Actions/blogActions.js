@@ -63,7 +63,6 @@ const removeBlog = id => ({
 
 export const startRemoveBlog = (id, photoID) => {
   return dispatch => {
-    console.log(photoID);
     database
       .ref(`blogInfo/${id}`)
       .remove()

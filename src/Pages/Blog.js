@@ -20,7 +20,7 @@ class Blog extends React.Component {
           {this.props.blogs.map(blog => (
             <div
               key={blog.blogID}
-              className="col-xs-12 col-sm-12 col-md-3 mb-2 mx-auto"
+              className="col-xs-2 col-sm-6 col-md-6 col-lg-4 mb-2 mx-auto"
             >
               <BlogCard
                 onClickEdit={() => {

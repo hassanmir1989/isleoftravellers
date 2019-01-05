@@ -25,12 +25,9 @@ class BlogUpdate extends React.Component {
       blogName: props.blogName ? props.blogName : "",
       blogDescription: props.blogDescription ? props.blogDescription : "",
       blogLocation: props.blogLocation ? props.blogLocation : "",
-      blogImageURL: props.blogImageURL
-        ? props.blogImageURL
-        : "No Image uploaded",
+      blogImageURL: props.blogImageURL ? props.blogImageURL : false,
       blogImageFilename: props.blogImageFilename ? props.blogImageFilename : "",
       error: "",
-      uploadButton: props.blogImageURL ? false : true,
       progress: 0
     };
   }
@@ -132,7 +129,7 @@ class BlogUpdate extends React.Component {
                 onChange={this.onChangeBlogLocation}
               />
             </FormGroup>
-            {!this.state.uploadButton ? (
+            {this.state.blogImageURL ? (
               <div className="text-center">
                 <img width="20%" src={this.state.blogImageURL} />
                 <br />
@@ -159,16 +156,20 @@ class BlogUpdate extends React.Component {
               color={
                 this.state.blogLocation &&
                 this.state.blogName &&
-                !this.state.uploadButton &&
                 this.state.blogDescription &&
                 "success"
               }
-              disabled={this.state.uploadButton}
+              disabled={
+                (!this.state.blogLocation &&
+                  !this.state.blogName &&
+                  !this.state.blogDescription) ||
+                !this.state.blogImageURL
+              }
             >
               {this.state.blogLocation &&
               this.state.blogName &&
-              !this.state.uploadButton &&
-              this.state.blogDescription
+              this.state.blogDescription &&
+              this.state.blogImageURL
                 ? "OKAY TO UPLOAD"
                 : "Please Complete everything to upload"}
             </Button>

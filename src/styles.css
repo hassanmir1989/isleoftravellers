@@ -23,3 +23,7 @@
 .navitem {
   padding-right: 20px;
 }
+
+.img-fluid {
+  max-height: 150px;
+}

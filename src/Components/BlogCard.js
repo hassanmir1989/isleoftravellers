@@ -16,7 +16,11 @@ const BlogCard = props => {
     <Card className="text-center">
       <CardBody>
         <div className="img-thumbnail">
-          <img width="100%" alt="No image found" src={props.blogImageURL} />
+          <img
+            className="img-fluid"
+            alt="No image found"
+            src={props.blogImageURL}
+          />
         </div>
         <CardTitle>{props.blogName}</CardTitle>
         <CardSubtitle>{props.blogLocation}</CardSubtitle>
