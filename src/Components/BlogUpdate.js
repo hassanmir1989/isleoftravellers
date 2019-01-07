@@ -75,18 +75,39 @@ class BlogUpdate extends React.Component {
   }
 
   handleUploadSuccess = blogImageFilename => {
-    firebase
-      .storage()
-      .ref("blogImages")
-      .child(blogImageFilename)
-      .getDownloadURL()
-      .then(blogImageURL => {
-        this.setState(prevState => ({
-          blogImageURL,
-          blogImageFilename,
-          uploadButton: !prevState.uploadButton
-        }));
-      });
+    if (this.state.blogImageFilename) {
+      firebase
+        .storage()
+        .ref(`blogImages/${this.state.blogImageFilename}`)
+        .delete()
+        .then(() => {
+          firebase
+            .storage()
+            .ref("blogImages")
+            .child(blogImageFilename)
+            .getDownloadURL()
+            .then(blogImageURL => {
+              this.setState(prevState => ({
+                blogImageURL,
+                blogImageFilename,
+                uploadButton: !prevState.uploadButton
+              }));
+            });
+        });
+    } else {
+      firebase
+        .storage()
+        .ref("blogImages")
+        .child(blogImageFilename)
+        .getDownloadURL()
+        .then(blogImageURL => {
+          this.setState(prevState => ({
+            blogImageURL,
+            blogImageFilename,
+            uploadButton: !prevState.uploadButton
+          }));
+        });
+    }
   };
 
   render() {

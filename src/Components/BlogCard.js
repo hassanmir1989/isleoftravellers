@@ -13,7 +13,7 @@ import { startRemoveBlog } from "../Actions/blogActions";
 import SingleBlog from "../Components/SingleBlog";
 const BlogCard = props => {
   return (
-    <Card className="text-center">
+    <Card className="text-center shadow p-3 mb-5 bg-white">
       <CardBody>
         <div className="img-thumbnail">
           <img
