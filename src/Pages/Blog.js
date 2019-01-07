@@ -10,6 +10,7 @@ class Blog extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Header />
@@ -37,6 +38,7 @@ class Blog extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  blogs: state.blogReducer
+  blogs: state.blogReducer,
+  customerReview: state.customerReviewReducer
 });
 export default connect(mapStateToProps)(Blog);
