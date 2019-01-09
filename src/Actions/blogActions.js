@@ -1,6 +1,7 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
 import firebase from "firebase";
+import moment from "moment";
 
 const addBlog = ({
   blogID,
@@ -8,7 +9,8 @@ const addBlog = ({
   blogDescription = "Not mentioned",
   blogLocation = "Not mentioned",
   blogImageURL = "Not mentioned",
-  blogImageFilename = "Not Mentioned"
+  blogImageFilename = "Not Mentioned",
+  blogUploadTime = moment().valueOf()
 } = {}) => ({
   type: "ADD_BLOG",
   blog: {
@@ -17,7 +19,8 @@ const addBlog = ({
     blogDescription,
     blogLocation,
     blogImageURL,
-    blogImageFilename
+    blogImageFilename,
+    blogUploadTime
   }
 });
 

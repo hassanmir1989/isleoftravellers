@@ -1,44 +1,62 @@
 import database from "../firebase/firebase";
-
+import moment from "moment";
 const customerReviewAction = ({
-  id = "",
+  customerReviewID,
   customerName = "",
   customerContact = "",
-  customerComment = ""
+  customerComment = "",
+  customerReviewTime,
+  customerEmail
 }) => ({
   type: "ADD_CUSTOMER_REVIEW",
   review: {
     customerName,
     customerContact,
     customerComment,
-    id
+    customerReviewID,
+    customerReviewTime,
+    customerEmail
   }
 });
 
-const startCustomerReviewAction = ({
-  customerName = "",
-  customerContact = "",
-  customerComment = ""
-}) => {
+const startCustomerReviewAction = (reviewDetails = {}) => {
   return dispatch => {
     database
       .ref("customerReviews")
       .push({
-        customerName,
-        customerContact,
-        customerComment
+        ...reviewDetails,
+        customerReviewTime: moment().valueOf()
       })
       .then(ref => {
         dispatch(
           customerReviewAction({
-            id: ref.key,
-            customerName,
-            customerContact,
-            customerComment
+            ...reviewDetails,
+            customerReviewID: ref.key
           })
         );
       });
   };
 };
 
-export default startCustomerReviewAction;
+const removeCustomerReviewAction = id => ({
+  type: "REMOVE_CUSTOMER_REVIEW",
+  id
+});
+
+const startRemoveCustomerReviewAction = id => {
+  return dispatch => {
+    database
+      .ref(`customerReviews/${id}`)
+      .remove()
+      .then(() => {
+        dispatch(removeCustomerReviewAction(id));
+      });
+  };
+};
+
+export {
+  startCustomerReviewAction,
+  customerReviewAction,
+  removeCustomerReviewAction,
+  startRemoveCustomerReviewAction
+};

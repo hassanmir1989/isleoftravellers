@@ -7,6 +7,8 @@ import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { addBlog } from "./Actions/blogActions";
 import database from "./firebase/firebase";
+import { customerReviewAction } from "../src/Actions/customerActions";
+import moment from "moment";
 const store = configureStore();
 
 database
@@ -23,6 +25,22 @@ database
     });
     blog.map(singleBlog => {
       store.dispatch(addBlog(singleBlog));
+    });
+  });
+
+database
+  .ref("customerReviews")
+  .once("value")
+  .then(snapshot => {
+    const customerReview = [];
+    snapshot.forEach(childSnapshot => {
+      customerReview.push({
+        ...childSnapshot.val(),
+        customerReviewID: childSnapshot.key
+      });
+    });
+    customerReview.map(singleReview => {
+      store.dispatch(customerReviewAction(singleReview));
     });
   });
 

@@ -7,9 +7,11 @@ import {
   FormGroup,
   Label,
   Input,
-  FormText
+  FormText,
+  Alert
 } from "reactstrap";
-import startCustomerReviewAction from "../Actions/customerActions";
+import moment from "moment";
+import { startCustomerReviewAction } from "../Actions/customerActions";
 import { connect } from "react-redux";
 
 class ContactUs extends React.Component {
@@ -19,17 +21,33 @@ class ContactUs extends React.Component {
     this.onChangeCustomerName = this.onChangeCustomerName.bind(this);
     this.onChangeCustomerContact = this.onChangeCustomerContact.bind(this);
     this.onChangeCustomerComment = this.onChangeCustomerComment.bind(this);
+    this.onChangeCustomerEmail = this.onChangeCustomerEmail.bind(this);
     this.state = {
       customerName: "",
       customerContact: "",
-      customerComment: ""
+      customerComment: "",
+      customerEmail: "",
+      error: ""
     };
   }
 
   onSubmitCustomerReview(e) {
     e.preventDefault();
-    this.props.dispatch(startCustomerReviewAction({ ...this.state }));
-    this.props.history.push("/");
+    if (
+      this.state.customerName &&
+      this.state.customerEmail &&
+      this.state.customerComment
+    ) {
+      this.setState(() => ({
+        error: ""
+      }));
+      this.props.dispatch(startCustomerReviewAction({ ...this.state }));
+      this.props.history.push("/");
+    } else {
+      this.setState(() => ({
+        error: "Please Enter the required details with '*'"
+      }));
+    }
   }
 
   onChangeCustomerName(e) {
@@ -52,13 +70,20 @@ class ContactUs extends React.Component {
       customerComment
     }));
   }
+
+  onChangeCustomerEmail(e) {
+    const customerEmail = e.target.value;
+    this.setState(() => ({
+      customerEmail
+    }));
+  }
   render() {
     return (
       <div>
         <Header />
         <div className="mt-5 container ">
           <div className="row">
-            <div className="shadow mx-auto col-xs-6 col-sm-10 col-md-6">
+            <div className="shadow mx-auto col-xs-6 col-sm-10 col-md-7">
               <Media
                 className="img-responsive"
                 width="100%"
@@ -67,8 +92,13 @@ class ContactUs extends React.Component {
             </div>
             <div className="mt-2 mx-auto col-xs-4 col-sm-10 col-md-5">
               <Form onSubmit={this.onSubmitCustomerReview} className="mt-4">
+                {this.state.error && (
+                  <Alert color="danger">{this.state.error}</Alert>
+                )}
                 <FormGroup>
-                  <Label>Name</Label>
+                  <Label>
+                    Name <span style={{ color: "red" }}>*</span>
+                  </Label>
                   <Input
                     name="customerName"
                     type="text"
@@ -82,16 +112,30 @@ class ContactUs extends React.Component {
                   <Label>Contact Number</Label>
                   <Input
                     name="customerContact"
-                    type="text"
+                    type="number"
                     className="form-control"
                     placeholder="Enter Mobile Number"
                     value={this.state.customerContact}
                     onChange={this.onChangeCustomerContact}
                   />
                 </FormGroup>
-
                 <FormGroup>
-                  <Label for="exampleText">Comments</Label>
+                  <Label>
+                    Email <span style={{ color: "red" }}>*</span>
+                  </Label>
+                  <Input
+                    name="customerEmail"
+                    type="email"
+                    className="form-control"
+                    placeholder="Enter Email"
+                    value={this.state.customerEmail}
+                    onChange={this.onChangeCustomerEmail}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleText">
+                    Comments <span style={{ color: "red" }}>*</span>
+                  </Label>
                   <Input
                     type="textarea"
                     name="customerComment"

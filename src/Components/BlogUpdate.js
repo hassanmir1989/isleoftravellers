@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import FileUploader from "react-firebase-file-uploader";
 import * as firebase from "firebase/app";
+import moment from "moment";
 
 class BlogUpdate extends React.Component {
   constructor(props) {
@@ -28,7 +29,10 @@ class BlogUpdate extends React.Component {
       blogImageURL: props.blogImageURL ? props.blogImageURL : false,
       blogImageFilename: props.blogImageFilename ? props.blogImageFilename : "",
       error: "",
-      progress: 0
+      progress: 0,
+      blogUploadTime: props.blogUploadTime
+        ? props.blogUploadTime
+        : moment().valueOf()
     };
   }
 
@@ -112,10 +116,16 @@ class BlogUpdate extends React.Component {
 
   render() {
     return (
-      <div className="mt-3 container">
+      <div className="mt-1 container">
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
+
+        <small>
+          <strong>{this.props.pageDateCaption} : </strong>
+          {moment(this.state.blogUploadTime).format("DD MMM YY")}
+        </small>
         <Jumbotron>
-          <h1 className="display-3 text-center">Blog Update</h1>
+          <h2 className="display-6 text-center">Blog Update</h2>
+
           <Form onSubmit={this.onFormSubmit}>
             <FormGroup>
               <Label for="exampleEmail">Blog Name</Label>
@@ -162,6 +172,7 @@ class BlogUpdate extends React.Component {
             <Progress style={{ color: "black" }} value={this.state.progress}>
               {this.state.progress}%
             </Progress>
+
             <br />
             <FileUploader
               accept="images/*"
